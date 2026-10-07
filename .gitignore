@@ -1,0 +1,7 @@
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.localstack/
+.DS_Store
+proof_*.json
