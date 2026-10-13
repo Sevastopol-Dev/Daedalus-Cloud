@@ -18,7 +18,7 @@ resource "aws_security_group" "tier1_app_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
   tags = merge(var.mandatory_tags, {
@@ -105,7 +105,7 @@ resource "aws_cloudwatch_log_group" "soc_alert_sink" {
 
 resource "aws_sns_topic" "soc_alerts" {
   name              = "${var.environment}-daedalus-soc-high-priority-alerts"
-  kms_master_key_id = "alias/aws/sns"
+  kms_master_key_id = aws_kms_key.daedalus_log_key.arn
 
   tags = var.mandatory_tags
 }
